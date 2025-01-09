@@ -101,12 +101,12 @@ public class Network {
 
         boolean indicator = true;
         if (!user1FollowsUser2) {
-            if(!user1.addFollowee(name2)){
+            if (!user1.addFollowee(name2)) {
                 indicator = false;
             }
         }
         if (!user2FollowsUser1) {
-            if (!user2.addFollowee(name1)){
+            if (!user2.addFollowee(name1)) {
                 indicator = false;
             }
         }
@@ -144,11 +144,15 @@ public class Network {
      * The user who appears the most in the follow lists of all the users.
      */
     public String mostPopularUser() {
-        int maxFollowers = 0;
         if (users[0] == null) {
             return null;
         }
-        String popularUser = users[0].getfFollows()[0];
+        String[] firstUserFollows = users[0].getfFollows();
+        String popularUser = "";
+        if (firstUserFollows[0] != null) {
+            popularUser = firstUserFollows[0];
+        }
+        int maxFollowers = 1;
         for (int i = 0; i < users.length; i++) {
             if (users[i] != null) {
                 int numOfFollowers = followeeCount(users[i].getName());
@@ -170,7 +174,7 @@ public class Network {
         int counter = 0;
         for (int j = 0; j < users.length; j++) {
             if (users[j] != null) {
-                if (!users[j].getName().equals(name) && users[j].follows(name)) {
+                if (users[j].follows(name)) {
                     counter++;
                 }
             }
