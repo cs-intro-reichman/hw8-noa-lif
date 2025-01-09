@@ -48,7 +48,9 @@
         }
         for (int i =0 ; i< follows.length ;i ++){
             if (follows[i]!=null){
-                if (follows[i].equals(name)){
+                String userName = follows[i].toLowerCase();
+                boolean isUserFollowsName = userName.equals(name);
+                if (isUserFollowsName){
                     return true;
                 }
             }
