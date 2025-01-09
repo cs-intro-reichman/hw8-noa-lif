@@ -94,19 +94,13 @@ public class Network {
         }
 
         User user1 = getUser(name1);
-        User user2 = getUser(name2);
 
         boolean user1FollowsUser2 = user1.follows(name2);
-        boolean user2FollowsUser1 = user2.follows(name1);
 
         boolean indicator = true;
         if (!user1FollowsUser2) {
-            if (!user1.addFollowee(name2)) {
-                indicator = false;
-            }
-        }
-        if (!user2FollowsUser1) {
-            if (!user2.addFollowee(name1)) {
+            boolean followAdded=user1.addFollowee(name2);
+            if (!followAdded){
                 indicator = false;
             }
         }
@@ -147,12 +141,15 @@ public class Network {
         if (users[0] == null) {
             return null;
         }
-        String[] firstUserFollows = users[0].getfFollows();
+        User firstUser = users[0];
+        String[] firstUserFollows = firstUser.getfFollows();
         String popularUser = "";
-        if (firstUserFollows[0] != null) {
+        int maxFollowers = 0;
+        if (!(firstUserFollows[0] == null)) {
             popularUser = firstUserFollows[0];
+            maxFollowers =1;
         }
-        int maxFollowers = 1;
+
         for (int i = 0; i < users.length; i++) {
             if (users[i] != null) {
                 int numOfFollowers = followeeCount(users[i].getName());
