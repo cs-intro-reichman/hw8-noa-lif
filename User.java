@@ -61,20 +61,20 @@
     /** Makes this user follow the given name. If successful, returns true. 
      *  If this user already follows the given name, or if the follows list is full, does nothing and returns false; */
     public boolean addFollowee(String name) {
-        if (follows[maxfCount-1]!=null){
+        if (fCount == maxfCount || follows[0]==null) {
             return false;
         }
-        if (follows(name)){
+        if (follows(name)) {
             return false;
         }
-        follows[theFirstNullFollowsCell(follows)] = name;
+        follows[theFirstNullFollowsCell()] = name;
         fCount++;
         return true;
     }
 
-    public int theFirstNullFollowsCell(String [] followsArray){
-        for (int i=0; i<followsArray.length;i++){
-            if (followsArray[i]==null){
+    public int theFirstNullFollowsCell(){
+        for (int i=0; i<this.follows.length;i++){
+            if (this.follows[i]==null){
                 return i;
             }
         }
