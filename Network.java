@@ -166,7 +166,7 @@ public class Network {
         String output = "";
         for (int i = 0; i < users.length; i++) {
             if (users[i] != null) {
-                output +="\n" users[i].toString();
+                output += "\n" + users[i].toString();
             }
         }
         return output;
