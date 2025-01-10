@@ -44,41 +44,27 @@
     /** If this user follows the given name, returns true; otherwise returns false. */
     public boolean follows(String name) {
         name = name.toLowerCase();
-        if (name.equals("")){
-            return false;
-        }
-        for (int i =0 ; i< follows.length ;i ++){
-            if (follows[i]!=null){
-                String userName = follows[i].toLowerCase();
-                boolean isUserFollowsName = userName.equals(name);
-                if (isUserFollowsName){
-                    return true;
-                }
+        for (int i = 0; i < fCount; i++) {
+            if (follows[i].toLowerCase().equals(name) == true) {
+                return true;
             }
+
         }
         return false;
     }
+    
     /** Makes this user follow the given name. If successful, returns true. 
      *  If this user already follows the given name, or if the follows list is full, does nothing and returns false; */
     public boolean addFollowee(String name) {
-        if (fCount == maxfCount || follows[0]==null) {
+        if (fCount == maxfCount) {
             return false;
         }
         if (follows(name)) {
             return false;
         }
-        follows[theFirstNullFollowsCell()] = name;
+        follows[fCount] = name;
         fCount++;
         return true;
-    }
-
-    public int theFirstNullFollowsCell(){
-        for (int i=0; i<this.follows.length;i++){
-            if (this.follows[i]==null){
-                return i;
-            }
-        }
-        return -1;
     }
 
     /** Removes the given name from the follows list of this user. If successful, returns true.
