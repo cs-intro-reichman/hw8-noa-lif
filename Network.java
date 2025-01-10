@@ -151,11 +151,9 @@ public class Network {
      */
     private int followeeCount(String name) {
         int counter = 0;
-        for (int j = 0; j < users.length; j++) {
-            if (users[j] != null) {
-                if (users[j].follows(name)) {
-                    counter++;
-                }
+        for (int i = 0; i < userCount; i++) {
+            if (users[i].follows(name)) {
+                counter++;
             }
         }
         return counter;
